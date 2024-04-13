@@ -1,17 +1,24 @@
-import Modal from '@/components/modal'
-import ProductCard from '@/components/productCard'
-import products, { Product } from '@/lib/mock/products'
+import Modal from '@/components/modal';
+import { ProductCard } from '@/components/productCard';
+import { Product } from '@/app/products/page';
 
-export default function ProductModal({
-  params: { id }
-}: {
-  params: { id: string }
-}) {
-  const product: Product = products.find(p => p.id === id)!
+interface Props {
+  id: string;
+  products: Product[];
+}
+
+const ProductModal = ({ id, products }: Props) => {
+  const product: Product | undefined = products.find(p => p.id === parseInt(id));
 
   return (
     <Modal>
-      <ProductCard product={product} />
+      {product ? (
+        <ProductCard product={product} />
+      ) : (
+        <p>No product found.</p>
+      )}
     </Modal>
-  )
-}
+  );
+};
+
+export default ProductModal;

@@ -1,13 +1,13 @@
 import Link from 'next/link'
-import products, { Product } from '@/lib/mock/products'
-import ProductCard from '@/components/productCard'
+import products, { Product } from '../page'
+import {ProductCard} from '@/components/productCard'
 
 export default function ProductPage({
   params: { id }
 }: {
   params: { id: string }
 }) {
-  const product: Product = products.find(p => p.id === id)!
+  const product = products.find(p => p.id === parseInt(id));
 
   return (
     <section className='py-24'>

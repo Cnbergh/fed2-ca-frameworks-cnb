@@ -1,21 +1,20 @@
-import Image from 'next/image'
-import { Product } from '@/lib/mock/products'
+import Link from 'next/link';
 
-export default function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product }) {
+  const productUrl = `/products/${product.id}`;
+  const { title, description, price, image = {}, id, reviews, rating } = product;
+  const { url = '/FallbackImage.png', alt = 'Default image' } = image;  // Ensure '/FallbackImage.png' exists in your public folder
+
   return (
-    <>
-      <Image
-        alt=''
-        src={product.image.url}
-        height={600}
-        width={600}
-        className='col-span-1 aspect-square w-full object-cover'
-      />
-
-      <div className=' bg-white p-2 px-4'>
-        <h3 className='font-serif text-xl font-medium'>{product.title}</h3>
-        <p className='text-sm text-gray-500'>Price: {product.price}</p>
-      </div>
-    </>
-  )
+    <div className="product-card">
+      <Link href={productUrl}>
+        <img src={url} alt={alt} />
+        <div>
+          <h3>{title}</h3>
+          <p>{description}</p>
+          <p>Rating: {rating}</p>
+        </div>
+      </Link>
+    </div>
+  );
 }
