@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/productCard.tsx", "app/products/page.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/productCard.tsx", "app/products/page.js", "app/products/@modal/(..)products/[id]/page.tsx"],
   "exclude": ["node_modules"]
 }

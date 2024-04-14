@@ -5,13 +5,13 @@ import useCart from '@/app/cart/useCart';
 
 const CheckoutPage = () => {
   const [orderPlaced, setOrderPlaced] = useState(false);
-  const cart = useCart((state) => state.cart);
-  const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+  const cart = useCart((state: any) => state.cart);
+  const totalPrice = cart.reduce((total: any, item: any) => total + (item.price * item.quantity), 0);
   const { removeItemFromCart } = useCart();
 
   const router = useRouter();
 
-  const handlePlaceOrder = (event) => {
+  const handlePlaceOrder = (event: any) => {
     event.preventDefault();
     alert("Thank you for your purchase!");
     setOrderPlaced(true);
@@ -25,7 +25,7 @@ const CheckoutPage = () => {
     <div className="container mx-auto">
       <h2 className="text-2xl font-semibold my-4">Checkout</h2>
       <div>
-        {cart.map((item, index) => (
+        {cart.map((item: any, index: any) => (
           <div key={item.id} className="flex justify-between items-center border-b py-4">
             <div className="flex items-center">
               <img src={item.image.url} alt={item.image.alt} className="w-16 h-16 object-cover rounded-md mr-4" />
