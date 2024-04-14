@@ -41,27 +41,26 @@ const ProductPage = ({ params: { id } }: ProductPageProps) => {
   if (!product) return <p>No product found.</p>;
 
   return (
-    <section className="py-12">
-      <div className="container mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <Link href="/products">
-            <span className="text-blue-600 hover:underline">&larr; Back to products</span>
-          </Link>
-          <h1 className="text-3xl font-bold">{product.title}</h1>
+    <section className="py-12 border border-gray-300 rounded-lg shadow-md">
+    <div className="container mx-auto p-4">
+      <div className="flex justify-between items-center mb-6">
+        <Link href="/products">
+          <span className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 cursor-pointer transition duration-300">&larr; Back to products</span>
+        </Link>
+        <h1 className="text-3xl font-bold">{product.title}</h1>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <img src={product.image.url} alt={product.image.alt} className="rounded-lg shadow-md" />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <img src={product.image.url} alt={product.image.alt} className="rounded-lg" />
-          </div>
-          <div>
-            <p className="text-gray-600">{product.description}</p>
-            <p className="text-gray-600">Price: ${product.price}</p>
-            <p className="text-gray-600">Rating: {product.rating}</p>
-            {/* Add any other product details you want to display */}
-          </div>
+        <div>
+          <p className="text-gray-800 py-2">{product.description}</p>
+          <p className="text-gray-800 py-2">Price: ${product.price}</p>
+          <p className="text-gray-800">Rating: {product.rating}</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   );
 };
 

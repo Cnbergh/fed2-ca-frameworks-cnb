@@ -42,11 +42,13 @@ const CheckoutPage = () => {
         ))}
         <p className="mt-4 font-semibold">Total Price: {totalPrice} kr</p>
       </div>
-      <form onSubmit={handlePlaceOrder} className="mt-4">
-        <input type="text" placeholder="Card Number" className="rounded-md px-4 py-2 mr-2" />
-        <input type="text" placeholder="Expiration Date" className="rounded-md px-4 py-2 mr-2" />
-        <input type="text" placeholder="CVV" className="rounded-md px-4 py-2 mr-2" />
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">Place Order</button>
+      <form onSubmit={handlePlaceOrder} className="flex flex-col mt-4 border border-gray-300 rounded-lg w-full h-full">
+        <div className='flex flex-col md:flex-row'>
+        <input type="text" placeholder="Card Number" className="rounded-md px-4 py-2 mr-2 w-full md:w-[49%]" />
+        <input type="text" placeholder="Expiration Date" className="rounded-md px-4 py-2 mr-2 w-full md:w-[24%]" />
+        <input type="text" placeholder="CVV" className="rounded-md px-4 py-2 mr-2 pb-2 w-full md:w-[24%]" />
+        </div>
+        <button type="submit" className="bg-black hover:bg text-white text-center px-4 py-2 rounded-md w-full">Place Order</button>
       </form>
     </div>
   );

@@ -43,7 +43,6 @@ const ProductListPage = () => {
   }, []);
 
   const handleProductClick = (productId: string) => {
-    // Redirect to the product page when a product is clicked
     router.push(`/products/${productId}`);
   };
 
@@ -52,7 +51,7 @@ const ProductListPage = () => {
   if (!products.length) return <p>No products found.</p>;
 
   return (
-    <section>
+    <section className='border border-gray-300 p-4 rounded-lg'>
       <ProductLayout>
         {products.map((product) => (
           <ProductCard

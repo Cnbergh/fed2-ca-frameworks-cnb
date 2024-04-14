@@ -6,12 +6,12 @@ import { Product } from '@/app/products/page';
 export interface ProductModalProps {
   product?: Product;
   productId?: string;
-  onClose: () => void; // Add onClose prop to the interface
+  onClose: () => void;
 }
 
-const ProductModal: React.FC<ProductModalProps> = ({ product, productId, onClose }) => { // Receive onClose prop
+
+const ProductModal: React.FC<ProductModalProps> = ({ product, productId, onClose }) => {
   const fetchProductDetails = async () => {
-    // Fetch product details based on productId
   };
 
   React.useEffect(() => {
@@ -21,7 +21,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, productId, onClose
   }, [product, productId]);
 
   return (
-    <Modal show={true} onClose={onClose}> {/* Pass onClose prop to the Modal component */}
+    <Modal show={true} onClose={onClose}>
       {product ? (
         <ProductCard product={product} />
       ) : (

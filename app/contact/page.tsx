@@ -70,7 +70,7 @@ export default function Contact() {
             </p>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-lg p-8 text-gray-600">
+        <div className="w-full max-h-96 object-cover mb-4 rounded-lg">
           <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
             <div>
               <label htmlFor="name" className="text-sm">
@@ -85,7 +85,7 @@ export default function Contact() {
                   handleBlur(e, (value) => value.length >= 3, setNameError)
                 }
                 placeholder="Your name"
-                className={`border border-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:border-teal-300 ${
+                className={`w-full border border-gray-300 p-4 rounded-b-lg${
                   nameError ? 'border-red-500' : ''
                 }`}
               />
@@ -102,7 +102,7 @@ export default function Contact() {
                 onChange={(e) => setEmail(e.target.value)}
                 onBlur={(e) => handleBlur(e, isValidEmail, setEmailError)}
                 placeholder="Your E-mail"
-                className={`border border-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:border-teal-300 ${
+                className={`w-full border border-gray-300 p-4 rounded-b-lg ${
                   emailError ? 'border-red-500' : ''
                 }`}
               />
@@ -121,7 +121,7 @@ export default function Contact() {
                 }
                 placeholder="Your message"
                 rows="4"
-                className={`border border-gray-300 rounded-md px-4 py-2 mt-2 outline-none focus:border-teal-300 ${
+                className={`w-full border border-gray-300 p-4 rounded-b-lg ${
                   messageError ? 'border-red-500' : ''
                 }`}
               />
@@ -131,7 +131,7 @@ export default function Contact() {
             </div>
             <button
               type="submit"
-              className="bg-teal-500 text-white font-bold rounded-lg px-6 py-2 uppercase text-sm">
+              className="bg-black hover:bg-gray-800 text-white px-4 py-2 rounded-md mt-4">
               Send message
             </button>
           </form>
