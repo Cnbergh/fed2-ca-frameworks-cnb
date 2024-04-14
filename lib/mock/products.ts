@@ -9,7 +9,7 @@ export type Product = {
   };
 };
 
-const products: Product[] = [
+/* const products: Product[] = [
   {
     id: '1',
     title: 'Product',
@@ -42,4 +42,4 @@ const products: Product[] = [
   },
 ];
 
-export default products;
+export default products; */

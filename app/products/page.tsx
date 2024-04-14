@@ -1,30 +1,68 @@
-import Link from 'next/link'
-import Image from 'next/image'
+'use client'
+import React, { useEffect, useState } from 'react';
+import { ProductCard } from '@/components/productCard';
+import Loading from './loading';
+import { ProductLayout } from '@/components/layouts/productLayout';
+import { useRouter } from 'next/navigation';
 
-import products from '@/lib/mock/products'
+export type Product = {
+  id: string;
+  title: string;
+  price: number;
+  description: string;
+  image: {
+    url: string;
+    alt: string;
+  };
+  rating: number;
+};
 
-export default function Products() {
+const ProductListPage = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState<string>('');
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`https://v2.api.noroff.dev/online-shop`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setProducts(data.data);
+        setLoading(false);
+      } catch (error) {
+        setError('Failed to fetch products: ' + (Error || 'Unknown error'));
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const handleProductClick = (productId: string) => {
+    router.push(`/products/${productId}`);
+  };
+
+  if (isLoading) return <Loading />;
+  if (error) return <p>{error}</p>;
+  if (!products.length) return <p>No products found.</p>;
+
   return (
-    <section className='mt-12'>
-      <div className='container'>
-        <h1 className='font-serif text-3xl font-bold text-gray-700'>Products</h1>
-
-        <ul className='mt-10 grid auto-rows-max grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
-          {products.map(({ id, image }) => (
-            <li key={id}>
-              <Link href={`/products/${id}`}>
-                <Image
-                  alt=''
-                  src={image.url}
-                  height={500}
-                  width={500}
-                  className='aspect-square w-full rounded-xl object-cover'
-                />
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <section className='border border-gray-300 p-4 rounded-lg'>
+      <ProductLayout>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onClick={() => handleProductClick(product.id)}
+          />
+        ))}
+      </ProductLayout>
     </section>
-  )
-}
+  );
+};
+
+export default ProductListPage;

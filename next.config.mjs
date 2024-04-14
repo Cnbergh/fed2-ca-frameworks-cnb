@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'placehold.co',
       },
+      {
+        protocol: 'https',
+        hostname: 'v2.api.noroff.dev',
+      },
     ],
   },
 };

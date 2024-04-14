@@ -1,21 +1,91 @@
-import Image from 'next/image'
-import { Product } from '@/lib/mock/products'
 
-export default function ProductCard({ product }: { product: Product }) {
+import React, { useState } from 'react';
+import Modal from '@/components/modal';
+import useCart from '@/app/cart/useCart';
+import { useRouter } from 'next/navigation';
+
+export function ProductCard({ product }: any) {
+  const {
+    title,
+    description,
+    price,
+    image = {},
+    reviews,
+    rating,
+    id
+  } = product || {};
+  const { url = '/FallbackImage.png', alt = 'Default image' } = image;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addItemToCart } = useCart();
+  const router = useRouter();
+
+  const handleAddToCart = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    addItemToCart(product);
+    alert('Product added to cart!');
+  };
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleViewDetails = () => {
+    router.push(`/products/${id}`);
+    handleModalOpen();
+  };
+
   return (
-    <>
-      <Image
-        alt=''
-        src={product.image.url}
-        height={600}
-        width={600}
-        className='col-span-1 aspect-square w-full object-cover'
+    <div className="product-card border border-gray-300 rounded-lg w-full h-full">
+      <img
+        src={url}
+        alt={alt}
+        onClick={handleModalOpen}
+        className="w-full h-72 max-h-96 object-cover mb-4 rounded-lg"
       />
-
-      <div className=' bg-white p-2 px-4'>
-        <h3 className='font-serif text-xl font-medium'>{product.title}</h3>
-        <p className='text-sm text-gray-500'>Price: {product.price}</p>
+      <div className="border border-gray-300 p-4 rounded-b-lg">
+        <h3 className="mb-2">{title}</h3>
+        <p className="mb-4">{description}</p>
+        <p className="mb-2">Rating: {rating}</p>
+        <button
+          onClick={handleAddToCart}
+          className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-200"
+        >
+          Add to Cart
+        </button>
       </div>
-    </>
-  )
+      <div className="w-full p-4 mx-auto flex flex-row align-bottom mt-auto">
+        <button
+          onClick={handleViewDetails}
+          className="bg-black hover:bg text-white text-center px-4 py-2 rounded-md w-full"
+        >
+          <span className="mx-auto">View Details</span>
+        </button>
+      </div>
+      <Modal show={isModalOpen} onClose={handleModalClose}>
+        <div className="modal-content">
+          <img
+            src={url}
+            alt={alt}
+            className="w-full max-h-96 object-cover mb-4 rounded-lg"
+          />
+          <h2 className="text-2xl font-bold mb-2">{title}</h2>
+          <p className="text-gray-600 mb-4">{description}</p>
+          <p className="text-gray-600">Price: ${price}</p>
+          <p className="text-gray-600">Rating: {rating}</p>
+          <button
+            onClick={handleModalClose}
+            className="hover:bg-gray-200 bg-gray-300 text-gray-800 px-4 py-2 rounded-md mt-4"
+          >
+            Close
+          </button>
+        </div>
+      </Modal>
+    </div>
+  );
 }
