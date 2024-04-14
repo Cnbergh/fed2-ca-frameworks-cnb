@@ -2,7 +2,7 @@ import Modal from '@/components/modal';
 import { ProductCard } from '@/components/productCard';
 import { Product } from '@/app/products/page';
 
-interface ProductModalProps {
+export interface ProductModalProps {
   product?: Product;
   id?: string;
 }
