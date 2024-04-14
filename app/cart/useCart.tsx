@@ -12,7 +12,8 @@ interface CartState {
 }
 
 const useCart = create<CartState>((set) => {
-  const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
+  // Check if localStorage is defined before accessing it
+  const storedCart = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('cart') || '[]') : [];
 
   return {
     cart: storedCart,
@@ -27,20 +28,29 @@ const useCart = create<CartState>((set) => {
     addItemToCart: (newItem) => {
       set((state) => {
         const newCart = [...state.cart, newItem];
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        // Check if localStorage is defined before accessing it
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('cart', JSON.stringify(newCart));
+        }
         return { ...state, cart: newCart };
       });
     },
     removeItemFromCart: (itemIndex) => {
       set((state) => {
         const newCart = state.cart.filter((_, index) => index !== itemIndex);
-        localStorage.setItem('cart', JSON.stringify(newCart));
+        // Check if localStorage is defined before accessing it
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('cart', JSON.stringify(newCart));
+        }
         return { ...state, cart: newCart };
       });
     },
     emptyCart: () => {
       set((state) => {
-        localStorage.removeItem('cart');
+        // Check if localStorage is defined before accessing it
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('cart');
+        }
         return { ...state, cart: [] };
       });
     },
