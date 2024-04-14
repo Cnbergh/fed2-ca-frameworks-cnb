@@ -2,11 +2,12 @@ import Modal from '@/components/modal';
 import { ProductCard } from '@/components/productCard';
 import { Product } from '@/app/products/page';
 
-interface ProductModalProps {
+interface Props {
   product: Product;
 }
 
-const ProductModal: React.FC<ProductModalProps> = ({ product }: ProductModalProps) => {
+const ProductModal = ({ product }: Props) => {
+
   return (
     <Modal>
       <ProductCard product={product} />
@@ -14,4 +15,4 @@ const ProductModal: React.FC<ProductModalProps> = ({ product }: ProductModalProp
   );
 };
 
-export default ProductModal;
+export default ProductModal
