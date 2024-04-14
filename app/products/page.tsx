@@ -1,8 +1,10 @@
-"use client"
+'use client';
 import React, { useEffect, useState } from 'react';
-import { ProductCard } from "@/components/productCard";
+import { Suspense } from 'react';
+import { ProductCard } from '@/components/productCard';
 import Loading from './loading';
 import { ProductLayout } from '@/components/layouts/productLayout';
+import ProductModal from '@/app/products/@modal/(..)products/[id]/page';
 
 export type Product = {
   id: string;
@@ -20,6 +22,9 @@ const ProductListPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -40,6 +45,10 @@ const ProductListPage = () => {
     fetchProducts();
   }, []);
 
+  const handleProductClick = (productId: string) => {
+    setSelectedProductId(productId);
+  };
+
   if (isLoading) return <Loading />;
   if (error) return <p>{error}</p>;
   if (!products.length) return <p>No products found.</p>;
@@ -47,10 +56,19 @@ const ProductListPage = () => {
   return (
     <section>
       <ProductLayout>
-      {products.map(product => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onClick={() => handleProductClick(product.id)}
+          />
+        ))}
       </ProductLayout>
+      {selectedProductId && (
+        <Suspense fallback={<Loading />}>
+          <ProductModal id={selectedProductId} />
+        </Suspense>
+      )}
     </section>
   );
 };

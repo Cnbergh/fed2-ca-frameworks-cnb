@@ -1,11 +1,9 @@
 import React from "react";
 import Link from "next/link";
 
-import { Card } from "./ui/card";
-
 export const ProductLoading = () => {
 	return (
-		<Card className="fixed inset-0 flex items-center justify-center z-10 animate-fadeIn">
+		<div className="fixed inset-0 flex items-center justify-center z-10 animate-fadeIn">
 			<Link
 				className="fixed inset-0 bg-black opacity-75 cursor-default"
 				href="/products"
@@ -53,6 +51,6 @@ export const ProductLoading = () => {
 					<div className="rounded-sm py-5 px-3 w-full animate-pulse bg-gray-300" />
 				</div>
 			</div>
-		</Card>
+		</div>
 	);
 };
