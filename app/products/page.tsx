@@ -34,7 +34,7 @@ const ProductListPage = () => {
         setProducts(data.data);
         setLoading(false);
       } catch (error) {
-        setError('Failed to fetch products: ' + (error.message || 'Unknown error'));
+        setError('Failed to fetch products: ' + (Error || 'Unknown error'));
         setLoading(false);
       }
     };
