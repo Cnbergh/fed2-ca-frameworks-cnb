@@ -15,6 +15,18 @@ export const Header = () => {
 			>
 				Products
 			</Link>
+			<Link
+				className="transition-all duration-300 ease-linear hover:text-accent text-white"
+				href="/contact"
+			>
+				Contact
+			</Link>
+			<Link
+				className="transition-all duration-300 ease-linear hover:text-accent text-white"
+				href="/checkout"
+			>
+				Cart
+			</Link>
 		</div>
 	);
 };

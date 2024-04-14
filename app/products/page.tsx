@@ -1,10 +1,9 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { Suspense } from 'react';
 import { ProductCard } from '@/components/productCard';
 import Loading from './loading';
 import { ProductLayout } from '@/components/layouts/productLayout';
-import ProductModal from '@/app/products/@modal/(..)products/[id]/page';
+import { useRouter } from 'next/navigation';
 
 export type Product = {
   id: string;
@@ -21,10 +20,8 @@ export type Product = {
 const ProductListPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setLoading] = useState(true);
-  const [error, setError] = useState<string>(''); // Specify type as string
-  const [selectedProductId, setSelectedProductId] = useState<string | null>(
-    null
-  );
+  const [error, setError] = useState<string>('');
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -37,7 +34,7 @@ const ProductListPage = () => {
         setProducts(data.data);
         setLoading(false);
       } catch (error) {
-        setError('Failed to fetch products: ' + (Error || 'Unknown error'));
+        setError('Failed to fetch products: ' + (error.message || 'Unknown error'));
         setLoading(false);
       }
     };
@@ -46,7 +43,8 @@ const ProductListPage = () => {
   }, []);
 
   const handleProductClick = (productId: string) => {
-    setSelectedProductId(productId);
+    // Redirect to the product page when a product is clicked
+    router.push(`/products/${productId}`);
   };
 
   if (isLoading) return <Loading />;
@@ -64,11 +62,6 @@ const ProductListPage = () => {
           />
         ))}
       </ProductLayout>
-      {selectedProductId && (
-        <Suspense fallback={<Loading />}>
-          <ProductModal id={selectedProductId} />
-        </Suspense>
-      )}
     </section>
   );
 };

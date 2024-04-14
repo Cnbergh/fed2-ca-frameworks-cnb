@@ -1,18 +1,18 @@
+'use client'
 import Modal from '@/components/modal';
 import { ProductCard } from '@/components/productCard';
 import { Product } from '@/app/products/page';
 
 export interface ProductModalProps {
   product?: Product;
-  id?: string;
+  productId?: string;
 }
 
-const ProductModal: React.FC<ProductModalProps> = ({ product, id }) => {
+const ProductModal: React.FC<ProductModalProps> = ({ product, productId }) => {
 
   return (
-    <Modal>
+    <Modal show={true}>
       {product && <ProductCard product={product} />}
-      {product && <ProductCard id={id} />}
     </Modal>
   );
 };
