@@ -17,7 +17,8 @@ const CheckoutPage = () => {
     setOrderPlaced(true);
 
     setTimeout(() => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined' && window.localStorage) {
+        // Check if localStorage is defined before using it
         emptyCart();
       }
       router.push('/checkoutSuccess');
