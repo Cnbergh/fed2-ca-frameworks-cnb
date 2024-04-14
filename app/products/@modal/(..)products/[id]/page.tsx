@@ -2,16 +2,17 @@ import Modal from '@/components/modal';
 import { ProductCard } from '@/components/productCard';
 import { Product } from '@/app/products/page';
 
-interface Props {
+interface ProductModalProps {
   product?: Product;
   id?: string;
 }
 
-const ProductModal = ({ product, id }: Props) => {
+const ProductModal: React.FC<ProductModalProps> = ({ product, id }) => {
 
   return (
     <Modal>
-      <ProductCard id={id} product={product} />
+      {product && <ProductCard product={product} />}
+      {product && <ProductCard id={id} />}
     </Modal>
   );
 };
