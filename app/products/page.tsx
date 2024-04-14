@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import React, { useEffect, useState } from 'react';
 import { Suspense } from 'react';
 import { ProductCard } from '@/components/productCard';
@@ -21,7 +21,7 @@ export type Product = {
 const ProductListPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string>(''); // Specify type as string
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null
   );
@@ -37,7 +37,7 @@ const ProductListPage = () => {
         setProducts(data.data);
         setLoading(false);
       } catch (error) {
-        setError('Failed to fetch products: ' + error.message);
+        setError('Failed to fetch products: ' + (Error || 'Unknown error'));
         setLoading(false);
       }
     };

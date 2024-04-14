@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export function ProductCard({ product }) {
+export function ProductCard({ product }: any) {
   const productUrl = product && product.id ? `/products/${product.id}` : '';
   const { title, description, price, image = {}, reviews, rating } = product || {};
   const { url = '/FallbackImage.png', alt = 'Default image' } = image;
