@@ -7,7 +7,7 @@ const CheckoutPage = () => {
   const [orderPlaced, setOrderPlaced] = useState(false);
   const cart = useCart((state: any) => state.cart);
   const totalPrice = cart.reduce((total: any, item: any) => total + (item.price * item.quantity), 0);
-  const { removeItemFromCart, emptyCart } = useCart(); // Import emptyCart function
+  const { removeItemFromCart, emptyCart } = useCart(); 
 
   const router = useRouter();
 
@@ -17,7 +17,9 @@ const CheckoutPage = () => {
     setOrderPlaced(true);
 
     setTimeout(() => {
-      emptyCart(); // Clear the cart
+      if (typeof window !== 'undefined') {
+        emptyCart();
+      }
       router.push('/checkoutSuccess');
     }, 2000);
   };
