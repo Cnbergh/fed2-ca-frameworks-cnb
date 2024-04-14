@@ -2,11 +2,11 @@ import Modal from '@/components/modal';
 import { ProductCard } from '@/components/productCard';
 import { Product } from '@/app/products/page';
 
-interface Props {
+interface modelProps {
   product: Product;
 }
 
-const ProductModal = ({ product }: Props) => {
+const ProductModal = ({ product }: modelProps) => {
 
   return (
     <Modal>
