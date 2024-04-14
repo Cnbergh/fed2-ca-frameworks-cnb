@@ -1,7 +1,17 @@
 import { create } from 'zustand';
 
-const useCart = create((set) => {
-  // Load cart items from localStorage on initialization
+interface CartState {
+  cart: any[];
+  product: any;
+  openModal: boolean;
+  setOpenModal: () => void;
+  setProduct: (newProduct: any) => void; 
+  addItemToCart: (newItem: any) => void; 
+  removeItemFromCart: (itemIndex: number) => void; 
+  emptyCart: () => void;
+}
+
+const useCart = create<CartState>((set) => {
   const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
 
   return {
