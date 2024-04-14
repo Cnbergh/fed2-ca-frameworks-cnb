@@ -6,8 +6,7 @@ interface ProductModalProps {
   product: Product;
 }
 
-const ProductModal = ({ product }: ProductModalProps) => {
-
+const ProductModal: React.FC<ProductModalProps> = ({ product }: ProductModalProps) => {
   return (
     <Modal>
       <ProductCard product={product} />
