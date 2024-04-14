@@ -43,18 +43,21 @@ export default function Contact() {
     return isValid;
   }
 
-  function handleBlur(event, validationFunction, setErrorMessage) {
+  function handleBlur(
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
+    validationFunction: (value: string) => boolean,
+    setErrorMessage: React.Dispatch<React.SetStateAction<string>>
+  ) {
     const value = event.target.value;
     const isValid = validationFunction(value);
     setErrorMessage(isValid ? '' : 'Invalid input');
   }
 
-  function isValidEmail(email) {
+  function isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  function myPopupFunction() {}
 
   return (
     <div className="container mx-auto p-8 border border-gray-300 rounded-lg">
@@ -120,7 +123,7 @@ export default function Contact() {
                   handleBlur(e, (value) => value.length >= 10, setMessageError)
                 }
                 placeholder="Your message"
-                rows="4"
+                rows={parseInt("4")}
                 className={`w-full border border-gray-300 p-4 rounded-b-lg ${
                   messageError ? 'border-red-500' : ''
                 }`}

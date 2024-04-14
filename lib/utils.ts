@@ -1,3 +1,4 @@
+import { Product } from "@/app/products/page";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
