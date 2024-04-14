@@ -10,10 +10,10 @@ export default function Contact() {
   const [emailError, setEmailError] = useState('');
   const [messageError, setMessageError] = useState('');
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const isValid = validateForm();
-
+  
     if (isValid) {
       alert("Thank you for your message, you'll hear from us soon");
       setName('');
