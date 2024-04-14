@@ -23,5 +23,3 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, productId, onClose
     </Modal>
   );
 };
-
-export default ProductModal;
